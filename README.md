@@ -6,8 +6,9 @@ A local, Mac-native widget dashboard for the **Corsair Xeneon Edge™** touchscr
 **Website:** [vardek.app](https://vardek.app) · **Download:** [latest release](https://github.com/vardekapp/Vardek/releases/latest) · **vs iCUE:** [comparison](https://vardek.app/vs-icue/)
 
 > [!IMPORTANT]
-> **Upgrading to 1.0.19?** Add-on widgets were renamed and must be reinstalled.
-> Follow the [upgrade steps](#upgrading-to-1019) below.
+> **Upgrading to 1.0.20?** From 1.0.19, just install the new app. From 1.0.18 or
+> earlier, your add-on widgets were renamed and must be reinstalled — follow the
+> [upgrade steps](#upgrading-to-1020) below.
 
 ![Vardek dashboard — macro buttons, system sensors, and clock on the Xeneon Edge](assets/screenshots/dashboard.png)
 
@@ -47,40 +48,41 @@ Verify the download against `SHA256SUMS.txt` (attached to each release) if you l
 shasum -a 256 -c SHA256SUMS.txt
 ```
 
-## Upgrading to 1.0.19
+## Upgrading to 1.0.20
 
-**1. Install the app.** Quit Vardek, open `Vardek-1.0.19.dmg`, and drag
-**Vardek** into **Applications**, replacing the old copy. Open Vardek.
+**Install the app.** Quit Vardek, open `Vardek-1.0.20.dmg`, and drag **Vardek**
+into **Applications**, replacing the old copy. Open Vardek.
 
-**2. If you use add-on widgets** from
-[vardekapp/vardek-widgets](https://github.com/vardekapp/vardek-widgets), they
-were renamed from `com.vardek.<name>` to `app.vardek.<name>` and must be
-reinstalled — the old copies will not load:
+**Coming from 1.0.19?** That's all — nothing else to do.
 
-1. Get the latest add-ons:
-   `git clone https://github.com/vardekapp/vardek-widgets` (or `git pull` in your
-   existing copy).
-2. Install each add-on you use:
-   `./install-addon.sh app.vardek.<name>` — for example
-   `./install-addon.sh app.vardek.world-clocks`. This also removes the old
-   `com.vardek.<name>` copy.
-   
-   *Manual alternative:* copy the `app.vardek.<name>` folder into
-   `~/Library/Application Support/Vardek/widgets/` and delete the old
-   `com.vardek.<name>` folder.
-4. In Vardek, open **Admin** (⌘A) → **Widgets** and click **Rescan**.
-5. Click **Approve** on each add-on.
+<a name="upgrading-to-1019"></a>
+**Coming from 1.0.18 or earlier?** Do these steps too:
 
-Widgets you had already placed on your pages switch to the renamed add-on
-automatically and keep their settings.
+1. **Reinstall your add-on widgets.** Add-ons from
+   [vardekapp/vardek-widgets](https://github.com/vardekapp/vardek-widgets) were
+   renamed from `com.vardek.<name>` to `app.vardek.<name>` in 1.0.19, and the old
+   copies will not load.
+   1. Get the latest add-ons:
+      `git clone https://github.com/vardekapp/vardek-widgets` (or `git pull` in your
+      existing copy).
+   2. Install each add-on you use:
+      `./install-addon.sh app.vardek.<name>` — for example
+      `./install-addon.sh app.vardek.world-clocks`. This also removes the old
+      `com.vardek.<name>` copy.
+      *Manual alternative:* copy the `app.vardek.<name>` folder into
+      `~/Library/Application Support/Vardek/widgets/` and delete the old
+      `com.vardek.<name>` folder.
+   3. In Vardek, open **Admin** (⌘A) → **Widgets** and click **Rescan**.
+   4. Click **Approve** on each add-on.
 
-**3. UniFi Network or Flight Tracker users:** open the widget's settings in
-Admin and enter your API key again. Keys saved under the old add-on name are not
-carried over.
-
-**4. Your own widgets:** widget IDs starting with `com.vardek.` or
-`installation.` are reserved and won't load. Give your widget a different ID
-(for example `com.yourname.mywidget`), then Rescan and Approve.
+   Widgets you had already placed on your pages switch to the renamed add-on
+   automatically and keep their settings.
+2. **UniFi Network or Flight Tracker users:** open the widget's settings in
+   Admin and enter your API key again. Keys saved under the old add-on name are
+   not carried over.
+3. **Your own widgets:** widget IDs starting with `com.vardek.` or
+   `installation.` are reserved and won't load. Give your widget a different ID
+   (for example `com.yourname.mywidget`), then Rescan and Approve.
 
 **Coming from 1.0.17 or earlier?** Also read
 [What changed in 1.0.18](#what-changed-in-1018): Admin opens only inside the app
@@ -207,6 +209,27 @@ Edge™ arrives. The layout is built for the panel's 2560×720 shape and reads
 best there, but nothing requires that hardware.
 </details>
 
+## What changed in 1.0.20
+
+Reliability release; no security boundary changed. Full notes on the
+[release page](https://github.com/vardekapp/Vardek/releases/tag/v1.0.20).
+
+- **Recovers on its own.** If Vardek's background helper stops or stops
+  responding, the app restarts it automatically (with the same signature checks
+  as at launch) and shows "Reconnecting…"; after repeated failures it shows a
+  **Restart** button instead of a dead screen. One slow request no longer takes
+  the panel down, and the dashboard reloads itself after a web-content crash.
+- **No lost settings.** A save based on settings that changed elsewhere is
+  refused with a clear message instead of overwriting them, and Undo only undoes
+  the one thing you removed.
+- **Swipes don't press buttons.** Swiping or scrolling across the Macro Pad (or
+  any tappable item) no longer also taps it.
+- **Weather never sticks on "Loading…"**; errors show a tap-to-retry message.
+- **Finder's `.DS_Store` files are ignored** in the widgets folder instead of
+  causing a scan error or cancelling a widget's approval.
+
+See [Upgrading to 1.0.20](#upgrading-to-1020) — nothing to do if you're on 1.0.19.
+
 ## What changed in 1.0.19
 
 Security release; every user should update. Full notes on the
@@ -224,7 +247,7 @@ Security release; every user should update. Full notes on the
 - **Official add-ons renamed to `app.vardek.*`** so they load again (1.0.18
   reserved the old `com.vardek.*` names for built-in widgets).
 
-See [Upgrading to 1.0.19](#upgrading-to-1019) for what to do after installing.
+See [Upgrading to 1.0.20](#upgrading-to-1020) for what to do after installing.
 
 ## What changed in 1.0.18
 
