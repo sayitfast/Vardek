@@ -5,6 +5,10 @@ A local, Mac-native widget dashboard for the **Corsair Xeneon Edge™** touchscr
 
 **Website:** [vardek.app](https://vardek.app) · **Download:** [latest release](https://github.com/vardekapp/Vardek/releases/latest) · **vs iCUE:** [comparison](https://vardek.app/vs-icue/)
 
+> [!IMPORTANT]
+> **Upgrading to 1.0.19?** Add-on widgets were renamed and must be reinstalled.
+> Follow the [upgrade steps](#upgrading-to-1019) below.
+
 ![Vardek dashboard — macro buttons, system sensors, and clock on the Xeneon Edge](assets/screenshots/dashboard.png)
 
 ## What it is
@@ -42,6 +46,45 @@ Verify the download against `SHA256SUMS.txt` (attached to each release) if you l
 ```
 shasum -a 256 -c SHA256SUMS.txt
 ```
+
+## Upgrading to 1.0.19
+
+**1. Install the app.** Quit Vardek, open `Vardek-1.0.19.dmg`, and drag
+**Vardek** into **Applications**, replacing the old copy. Open Vardek.
+
+**2. If you use add-on widgets** from
+[vardekapp/vardek-widgets](https://github.com/vardekapp/vardek-widgets), they
+were renamed from `com.vardek.<name>` to `app.vardek.<name>` and must be
+reinstalled — the old copies will not load:
+
+1. Get the latest add-ons:
+   `git clone https://github.com/vardekapp/vardek-widgets` (or `git pull` in your
+   existing copy).
+2. Install each add-on you use:
+   `./install-addon.sh app.vardek.<name>` — for example
+   `./install-addon.sh app.vardek.world-clocks`. This also removes the old
+   `com.vardek.<name>` copy.
+   *Manual alternative:* copy the `app.vardek.<name>` folder into
+   `~/Library/Application Support/Vardek/widgets/` and delete the old
+   `com.vardek.<name>` folder.
+3. In Vardek, open **Admin** (⌘A) → **Widgets** and click **Rescan**.
+4. Click **Approve** on each add-on.
+
+Widgets you had already placed on your pages switch to the renamed add-on
+automatically and keep their settings.
+
+**3. UniFi Network or Flight Tracker users:** open the widget's settings in
+Admin and enter your API key again. Keys saved under the old add-on name are not
+carried over.
+
+**4. Your own widgets:** widget IDs starting with `com.vardek.` or
+`installation.` are reserved and won't load. Give your widget a different ID
+(for example `com.yourname.mywidget`), then Rescan and Approve.
+
+**Coming from 1.0.17 or earlier?** Also read
+[What changed in 1.0.18](#what-changed-in-1018): Admin opens only inside the app
+(⌘A — the browser Admin at `127.0.0.1:8137` is gone), and every user-installed
+widget must be approved once in Admin.
 
 ## Documentation
 
@@ -180,21 +223,7 @@ Security release; every user should update. Full notes on the
 - **Official add-ons renamed to `app.vardek.*`** so they load again (1.0.18
   reserved the old `com.vardek.*` names for built-in widgets).
 
-### Upgrading to 1.0.19
-
-1. Download `Vardek-1.0.19.dmg`, quit Vardek, and drag the new app over the old
-   one in **Applications**.
-2. **If you use add-on widgets from
-   [vardekapp/vardek-widgets](https://github.com/vardekapp/vardek-widgets):**
-   download the repo again and install each add-on you use
-   (`./install-addon.sh app.vardek.<name>` removes the old `com.vardek.<name>`
-   copy for you). Then open Admin → Widgets, press **Rescan**, and **Approve**
-   each add-on. Widgets already on your pages switch to the renamed add-on
-   automatically and keep their settings.
-3. **UniFi Network and Flight Tracker users:** enter your API key again in the
-   widget's settings. Keys saved for the old add-on name are not carried over.
-4. **Coming from 1.0.17 or earlier:** also read the 1.0.18 notes below — Admin is
-   now in-app only (⌘A), and user widgets need a one-time approval.
+See [Upgrading to 1.0.19](#upgrading-to-1019) for what to do after installing.
 
 ## What changed in 1.0.18
 
