@@ -6,9 +6,9 @@ A local, Mac-native widget dashboard for the **Corsair Xeneon Edge™** touchscr
 **Website:** [vardek.app](https://vardek.app) · **Download:** [latest release](https://github.com/vardekapp/Vardek/releases/latest) · **vs iCUE:** [comparison](https://vardek.app/vs-icue/)
 
 > [!IMPORTANT]
-> **Upgrading to 1.0.20?** From 1.0.19, just install the new app. From 1.0.18 or
-> earlier, your add-on widgets were renamed and must be reinstalled — follow the
-> [upgrade steps](#upgrading-to-1020) below.
+> **Upgrading to 1.0.21?** From 1.0.19 or 1.0.20, just install the new app. From
+> 1.0.18 or earlier, your add-on widgets were renamed and must be reinstalled —
+> follow the [upgrade steps](#upgrading-to-1021) below.
 
 ![Vardek dashboard — macro buttons, system sensors, and clock on the Xeneon Edge](assets/screenshots/dashboard.png)
 
@@ -48,12 +48,13 @@ Verify the download against `SHA256SUMS.txt` (attached to each release) if you l
 shasum -a 256 -c SHA256SUMS.txt
 ```
 
-## Upgrading to 1.0.20
+## Upgrading to 1.0.21
 
-**Install the app.** Quit Vardek, open `Vardek-1.0.20.dmg`, and drag **Vardek**
+<a name="upgrading-to-1020"></a>
+**Install the app.** Quit Vardek, open `Vardek-1.0.21.dmg`, and drag **Vardek**
 into **Applications**, replacing the old copy. Open Vardek.
 
-**Coming from 1.0.19?** That's all — nothing else to do.
+**Coming from 1.0.19 or 1.0.20?** That's all — nothing else to do.
 
 <a name="upgrading-to-1019"></a>
 **Coming from 1.0.18 or earlier?** Do these steps too:
@@ -209,6 +210,19 @@ Edge™ arrives. The layout is built for the panel's 2560×720 shape and reads
 best there, but nothing requires that hardware.
 </details>
 
+## What changed in 1.0.21
+
+Fix release. Full notes on the
+[release page](https://github.com/vardekapp/Vardek/releases/tag/v1.0.21).
+
+- **Help works again.** Since 1.0.18 every Help page showed "Failed to load …
+  Error: 404" because page names contain spaces. Background images and widget
+  files with spaces in their names are fixed too.
+- **Stricter file paths** on the app's private connection to its background
+  helper: `.` and `..` segments, plain or encoded, are refused.
+
+See [Upgrading to 1.0.21](#upgrading-to-1021) — nothing to do if you're on 1.0.19 or 1.0.20.
+
 ## What changed in 1.0.20
 
 Reliability release; no security boundary changed. Full notes on the
@@ -228,7 +242,7 @@ Reliability release; no security boundary changed. Full notes on the
 - **Finder's `.DS_Store` files are ignored** in the widgets folder instead of
   causing a scan error or cancelling a widget's approval.
 
-See [Upgrading to 1.0.20](#upgrading-to-1020) — nothing to do if you're on 1.0.19.
+See [Upgrading to 1.0.21](#upgrading-to-1021) — nothing to do if you're on 1.0.19.
 
 ## What changed in 1.0.19
 
@@ -247,7 +261,7 @@ Security release; every user should update. Full notes on the
 - **Official add-ons renamed to `app.vardek.*`** so they load again (1.0.18
   reserved the old `com.vardek.*` names for built-in widgets).
 
-See [Upgrading to 1.0.20](#upgrading-to-1020) for what to do after installing.
+See [Upgrading to 1.0.21](#upgrading-to-1021) for what to do after installing.
 
 ## What changed in 1.0.18
 
