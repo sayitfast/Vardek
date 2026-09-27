@@ -6,9 +6,9 @@ A local, Mac-native widget dashboard for the **Corsair Xeneon Edge™** touchscr
 **Website:** [vardek.app](https://vardek.app) · **Download:** [latest release](https://github.com/vardekapp/Vardek/releases/latest) · **vs iCUE:** [comparison](https://vardek.app/vs-icue/)
 
 > [!IMPORTANT]
-> **Upgrading to 1.0.21?** From 1.0.19 or 1.0.20, just install the new app. From
+> **Upgrading to 1.0.22?** From 1.0.19, 1.0.20 or 1.0.21, just install the new app. From
 > 1.0.18 or earlier, your add-on widgets were renamed and must be reinstalled —
-> follow the [upgrade steps](#upgrading-to-1021) below.
+> follow the [upgrade steps](#upgrading-to-1022) below.
 
 ![Vardek dashboard — macro buttons, system sensors, and clock on the Xeneon Edge](assets/screenshots/dashboard.png)
 
@@ -48,13 +48,16 @@ Verify the download against `SHA256SUMS.txt` (attached to each release) if you l
 shasum -a 256 -c SHA256SUMS.txt
 ```
 
-## Upgrading to 1.0.21
+## Upgrading to 1.0.22
 
+<a name="upgrading-to-1021"></a>
 <a name="upgrading-to-1020"></a>
-**Install the app.** Quit Vardek, open `Vardek-1.0.21.dmg`, and drag **Vardek**
+**Install the app.** Quit Vardek, open `Vardek-1.0.22.dmg`, and drag **Vardek**
 into **Applications**, replacing the old copy. Open Vardek.
 
-**Coming from 1.0.19 or 1.0.20?** That's all — nothing else to do.
+**Coming from 1.0.19, 1.0.20 or 1.0.21?** That's all — nothing else to do.
+Auto-brightness is now built in; if you installed `m1ddc` only for Vardek you
+can remove it (`brew uninstall m1ddc`).
 
 <a name="upgrading-to-1019"></a>
 **Coming from 1.0.18 or earlier?** Do these steps too:
@@ -210,6 +213,25 @@ Edge™ arrives. The layout is built for the panel's 2560×720 shape and reads
 best there, but nothing requires that hardware.
 </details>
 
+## What changed in 1.0.22
+
+Security hardening release. Full notes on the
+[release page](https://github.com/vardekapp/Vardek/releases/tag/v1.0.22).
+
+- **Strict Content Security Policy** for the dashboard, Settings and Help: only
+  Vardek's own script files can run where the app's private helper connection is
+  available. Those pages are loaded into memory from the signed app at launch.
+- **Private settings files:** `config.json` and the approval list are readable
+  only by your account, with crash-safe saves.
+- **Approve and Revoke ask first**, listing the widget, its fingerprint, the
+  sites it can contact and its key names. Approving a new add-on version deletes
+  keys saved for older versions.
+- **Auto-brightness no longer needs `m1ddc`.**
+- Leftover pre-1.0.18 loopback code removed; release builds are checked against
+  the exact signing identity and permissions before notarization.
+
+See [Upgrading to 1.0.22](#upgrading-to-1022) — nothing to do if you're on 1.0.19 or later.
+
 ## What changed in 1.0.21
 
 Fix release. Full notes on the
@@ -221,7 +243,7 @@ Fix release. Full notes on the
 - **Stricter file paths** on the app's private connection to its background
   helper: `.` and `..` segments, plain or encoded, are refused.
 
-See [Upgrading to 1.0.21](#upgrading-to-1021) — nothing to do if you're on 1.0.19 or 1.0.20.
+See [Upgrading to 1.0.22](#upgrading-to-1022) — nothing to do if you're on 1.0.19 or later.
 
 ## What changed in 1.0.20
 
@@ -242,7 +264,7 @@ Reliability release; no security boundary changed. Full notes on the
 - **Finder's `.DS_Store` files are ignored** in the widgets folder instead of
   causing a scan error or cancelling a widget's approval.
 
-See [Upgrading to 1.0.21](#upgrading-to-1021) — nothing to do if you're on 1.0.19.
+See [Upgrading to 1.0.22](#upgrading-to-1022) — nothing to do if you're on 1.0.19 or later.
 
 ## What changed in 1.0.19
 
@@ -261,7 +283,7 @@ Security release; every user should update. Full notes on the
 - **Official add-ons renamed to `app.vardek.*`** so they load again (1.0.18
   reserved the old `com.vardek.*` names for built-in widgets).
 
-See [Upgrading to 1.0.21](#upgrading-to-1021) for what to do after installing.
+See [Upgrading to 1.0.22](#upgrading-to-1022) for what to do after installing.
 
 ## What changed in 1.0.18
 
