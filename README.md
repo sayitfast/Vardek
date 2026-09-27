@@ -37,10 +37,10 @@ your Mac. API keys live in the macOS Keychain, never in a plaintext config file.
 2. Open it and drag **Vardek** to **Applications**.
 3. Launch Vardek. The app is signed and notarized by Apple.
 
-Verify the download against `SHA256SUMS` if you like:
+Verify the download against `SHA256SUMS.txt` (attached to each release) if you like:
 
 ```
-shasum -a 256 -c SHA256SUMS
+shasum -a 256 -c SHA256SUMS.txt
 ```
 
 ## Documentation
@@ -55,13 +55,16 @@ shasum -a 256 -c SHA256SUMS
 ## Widgets
 
 Six widgets ship bundled, curated and fixed at install. Drop your own into
-`~/Library/Application Support/Vardek/widgets/`, rescan, and approve it once in
-Admin — no app update needed.
+`~/Library/Application Support/Vardek/widgets/`, press **Rescan** in Admin →
+Widgets, and approve it once — no app update needed. Widget IDs starting with
+`com.vardek.` are reserved for the bundled widgets; your own widgets need a
+different ID.
 
 **Add-on widgets:** install more after the fact — no app update — from
 **[vardekapp/vardek-widgets](https://github.com/vardekapp/vardek-widgets)**.
-That repo is open source; grab a widget, drop it in the folder above, rescan,
-approve it in Admin.
+That repo is open source; grab a widget, drop it in the folder above (or run its
+`install-addon.sh`), press **Rescan**, and approve it in Admin. Official add-ons
+use `app.vardek.*` IDs since 1.0.19.
 [Authoring guide](https://vardek.app/widgets/authoring/) and PRs welcome there too.
 
 **Community add-ons:** [kevinelliott/vardek-widgets](https://github.com/kevinelliott/vardek-widgets)
@@ -160,9 +163,42 @@ Edge™ arrives. The layout is built for the panel's 2560×720 shape and reads
 best there, but nothing requires that hardware.
 </details>
 
-## What changed in 1.0.18
+## What changed in 1.0.19
 
 Security release; every user should update. Full notes on the
+[release page](https://github.com/vardekapp/Vardek/releases/tag/v1.0.19).
+
+- **Tighter widget network rules.** A widget's allowed destinations are checked
+  by exact host and port, private and reserved network addresses are blocked in
+  every form (including IPv6 transition addresses), request headers must be
+  well-formed, and upstream cookies never reach a widget.
+- **Sturdier daemon.** Malformed widget requests are rejected with an error
+  instead of stopping the app's background process.
+- **Limits on widgets.** Each widget has a message budget; only visible widgets
+  can change pages or ask to open a link, and after you cancel a link the same
+  widget has to wait before asking again.
+- **Official add-ons renamed to `app.vardek.*`** so they load again (1.0.18
+  reserved the old `com.vardek.*` names for built-in widgets).
+
+### Upgrading to 1.0.19
+
+1. Download `Vardek-1.0.19.dmg`, quit Vardek, and drag the new app over the old
+   one in **Applications**.
+2. **If you use add-on widgets from
+   [vardekapp/vardek-widgets](https://github.com/vardekapp/vardek-widgets):**
+   download the repo again and install each add-on you use
+   (`./install-addon.sh app.vardek.<name>` removes the old `com.vardek.<name>`
+   copy for you). Then open Admin → Widgets, press **Rescan**, and **Approve**
+   each add-on. Widgets already on your pages switch to the renamed add-on
+   automatically and keep their settings.
+3. **UniFi Network and Flight Tracker users:** enter your API key again in the
+   widget's settings. Keys saved for the old add-on name are not carried over.
+4. **Coming from 1.0.17 or earlier:** also read the 1.0.18 notes below — Admin is
+   now in-app only (⌘A), and user widgets need a one-time approval.
+
+## What changed in 1.0.18
+
+Security release. Full notes on the
 [release page](https://github.com/vardekapp/Vardek/releases/tag/v1.0.18).
 
 - **No network port.** The daemon no longer listens on `127.0.0.1:8137`. The app
