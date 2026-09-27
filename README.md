@@ -6,8 +6,8 @@ A local, Mac-native widget dashboard for the **Corsair Xeneon Edge™** touchscr
 **Website:** [vardek.app](https://vardek.app) · **Download:** [latest release](https://github.com/vardekapp/Vardek/releases/latest) · **vs iCUE:** [comparison](https://vardek.app/vs-icue/)
 
 > [!IMPORTANT]
-> **Upgrading to 1.0.22?** From 1.0.19, 1.0.20 or 1.0.21, just install the new app. From
-> 1.0.18 or earlier, your add-on widgets were renamed and must be reinstalled —
+> **Upgrading to 1.0.22?** From 1.0.19 through 1.0.21, just install the new app. Upgrading from
+> 1.0.18 or earlier, the add-on widgets were renamed and must be reinstalled —
 > follow the [upgrade steps](#upgrading-to-1022) below.
 
 ![Vardek dashboard — macro buttons, system sensors, and clock on the Xeneon Edge](assets/screenshots/dashboard.png)
