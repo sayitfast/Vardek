@@ -64,11 +64,12 @@ reinstalled — the old copies will not load:
    `./install-addon.sh app.vardek.<name>` — for example
    `./install-addon.sh app.vardek.world-clocks`. This also removes the old
    `com.vardek.<name>` copy.
+   
    *Manual alternative:* copy the `app.vardek.<name>` folder into
    `~/Library/Application Support/Vardek/widgets/` and delete the old
    `com.vardek.<name>` folder.
-3. In Vardek, open **Admin** (⌘A) → **Widgets** and click **Rescan**.
-4. Click **Approve** on each add-on.
+4. In Vardek, open **Admin** (⌘A) → **Widgets** and click **Rescan**.
+5. Click **Approve** on each add-on.
 
 Widgets you had already placed on your pages switch to the renamed add-on
 automatically and keep their settings.
